@@ -19,11 +19,15 @@ from config import (
     THRESHOLD_PATH_INVALID_SCHEMA,  # noqa: F401
 )
 from fast_match import normalize, tier0_lookup, is_direct_response, GENERIC_HELP_RESPONSE
-from classifier import classify, DispatchResult, OOD_RESPONSE_TEXT
+from classifier import classify, warmup, DispatchResult, OOD_RESPONSE_TEXT
 from prompt_builder import build_prompt, resolve_categories
 from triage import build_triage_prompt
 
 app = Flask(__name__)
+
+# Eagerly load the embedding model and centroids at startup so the first
+# request does not incur cold-start latency.
+warmup()
 
 
 # ---------------------------------------------------------------------------
