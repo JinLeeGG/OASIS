@@ -1,8 +1,10 @@
 # TODO
 
+- [ ] classify-batch-test llm 사용 안됨
+- [ ] 답변 중복 문제
+- [ ] oasis-rag 폴더 제거, 관련된 사용안하는 ts 파일 제거
 - [ ] 데모용 스크립트 선별
 - [ ] 더 작은 모델 시도 qwen3.5:0.8b
-- [ ] 중복 prompt 자동 캐싱? (시스템 프롬프트 따로 inject?)
 - [ ] 첫 대답엔 질문 확정?
 
 - meeting

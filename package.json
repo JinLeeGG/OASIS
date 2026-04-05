@@ -14,6 +14,7 @@
     "rag:chat": "ts-node -r tsconfig-paths/register src/test/rag-llm-test.ts",
     "test:oasis": "ts-node -r tsconfig-paths/register src/test/oasis-test.ts",
     "test:classify": "ts-node -r tsconfig-paths/register src/test/classify-text-test.ts",
+    "test:classify:batch": "ts-node -r tsconfig-paths/register src/test/classify-batch-test.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

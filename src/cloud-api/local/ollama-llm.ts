@@ -42,7 +42,7 @@ const enableThinking = process.env.ENABLE_THINKING === "true";
 const isOasisMode = process.env.ENABLE_OASIS_MATCHER === "true" || true;
 const oasisOptions = isOasisMode
   ? {
-      num_predict: 300,
+      num_predict: 180,
       temperature: 0.25,
     }
   : undefined;

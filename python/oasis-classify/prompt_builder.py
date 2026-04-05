@@ -54,9 +54,9 @@ _ALSO_CHECK: dict[str, str] = _load_also_check()
 # ---------------------------------------------------------------------------
 
 _PROMPT_TEMPLATE = """\
-You are an emergency first-aid assistant. Using the steps in the MANUAL below, give numbered guidance that directly addresses the situation. Select only the steps that apply — skip irrelevant ones. Use direct second-person language. Begin immediately with "1." — no introductory sentence.
+First-aid assistant. Using the REFERENCE below, give numbered step-by-step guidance for the user's situation. Select only what applies. Most critical first. No intro — start with 1. Plain text only. Only use information from the REFERENCE — do not add anything else. No disclaimers.
 
-MANUAL:
+REFERENCE:
 {manual}"""
 
 _ALSO_CHECK_TEMPLATE = "ALSO CHECK: {category} — {summary}"
@@ -136,7 +136,7 @@ def build_prompt(
     # Build primary-only prompt first
     primary_prompt = _PROMPT_TEMPLATE.format(manual=manual)
 
-    if secondary_category and secondary_category != primary_category:
+    if secondary_category and secondary_category != primary_category and secondary_category != "out_of_domain":
         also_check_summary = _ALSO_CHECK.get(secondary_category, "")
         if also_check_summary:
             also_check_block = _ALSO_CHECK_TEMPLATE.format(
@@ -145,9 +145,7 @@ def build_prompt(
             )
             # Insert also-check block after the manual
             manual_with_also = manual + "\n\n" + also_check_block
-            combined_prompt = _PROMPT_TEMPLATE.format(
-                manual=manual_with_also
-            )
+            combined_prompt = _PROMPT_TEMPLATE.format(manual=manual_with_also)
             if count_tokens(combined_prompt) <= MAX_PROMPT_TOKENS:
                 return combined_prompt
             # Over token ceiling — drop secondary block entirely
