@@ -58,11 +58,33 @@ bash index_knowledge.sh
 
 ## Running
 
+### Original Node.js Chatbot Layer
 ```bash
 ollama serve                              # Start LLM (gemma3:1b)
 cd python/oasis-rag && python app.py      # RAG service      :5001
 cd python/oasis-classify && python app.py # Classifier service :5002
 bash run_chatbot.sh                       # Node.js chatbot layer
+```
+
+### Python GUI Application
+To run the newer GUI interface, use the integration script:
+```bash
+bash run_oasis_gui.sh
+```
+
+### Manual GUI Startup (For Debugging)
+To run the GUI components separately for debugging, open 3 terminal tabs:
+```bash
+# Terminal 1: Start LLM
+ollama serve
+
+# Terminal 2: Start Classifier service
+source venv/bin/activate
+python3 python/oasis-classify/service.py
+
+# Terminal 3: Start GUI Application
+source venv/bin/activate
+python3 python/oasis-gui/main.py
 ```
 
 To start on boot (headless):
